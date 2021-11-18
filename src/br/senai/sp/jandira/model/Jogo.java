@@ -6,7 +6,7 @@ public class Jogo {
 	private Fabricante fabricante;
 	private boolean status;
 	private Console console;
-	private double valor;
+	private String valor;
 	private String observacoes;
 	
 	public String getTiulo() {
@@ -33,10 +33,10 @@ public class Jogo {
 	public void setConsole(Console console) {
 		this.console = console;
 	}
-	public double getValor() {
+	public String getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
+	public void setValor(String valor) {
 		this.valor = valor;
 	}
 	public String getObservacoes() {

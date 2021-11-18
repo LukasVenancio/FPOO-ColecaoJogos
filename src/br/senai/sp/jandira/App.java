@@ -17,7 +17,6 @@ public class App {
 		GTA.setStatus(true);
 		GTA.setFabricante(RockStar);
 		GTA.setConsole(Console.XBOX);
-		GTA.setValor(69.90);
 		GTA.setObservacoes("Ainda faltando completar missões secundarias.");
 		
 		System.out.println(GTA.getTiulo());

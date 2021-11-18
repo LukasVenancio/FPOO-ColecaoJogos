@@ -20,13 +20,18 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import br.senai.sp.jandira.model.Console;
+import br.senai.sp.jandira.model.Jogo;
+import br.senai.sp.jandira.repository.JogoRepository;
 
-public class FrameAdicionarJogos extends JFrame {
+public class FrameAdicionarJogos extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField txtTitulo;
 	private JTextField txtValor;
 	private JTextField txtObervacoes;
+	private Jogo jogo;
+	private int posicao;
+	public FrameColecao colecao;
 
 	public FrameAdicionarJogos() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -112,6 +117,25 @@ public class FrameAdicionarJogos extends JFrame {
 		btnSalvar.setBounds(342, 350, 162, 41);
 		contentPane.add(btnSalvar);
 		
+		
+		btnSalvar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				jogo = new Jogo();
+				jogo.setTiulo(txtTitulo.getText());
+				jogo.setStatus(chckbxStatus.isSelected());
+				jogo.setConsole(determinarConsole(comboConsole.getSelectedIndex()));
+				jogo.setValor(txtValor.getText());
+				jogo.setObservacoes(txtObervacoes.getText());
+				chckbxStatus.setSelected(jogo.isStatus());
+				posicao++;
+				
+				colecao.testar(jogo, posicao);	
+			}
+		});
+		
 		btnAdicionarFabricante.addActionListener(new ActionListener() {
 			
 			@Override
@@ -123,4 +147,31 @@ public class FrameAdicionarJogos extends JFrame {
 		});
 		
 	}
+	private Console determinarConsole(int consoleSelecionado) {
+
+		if (consoleSelecionado == 0) {
+			return Console.XBOX;
+		} else if (consoleSelecionado == 1) {
+			return Console.PLAYSTATION;
+		} else if (consoleSelecionado == 2) {
+			return Console.SWITCH;
+		} else if (consoleSelecionado == 2) {
+			return Console.WII;	
+		}else {
+			return Console.PC;
+		}
+	}
+	
+	public Jogo retornarJogo() {
+		return jogo;
+	}
+	public int retornarPosicai() {
+		return posicao;
+	}
+	
+//	public void testar(JogoRepository colecao) {
+//		JogoRepository teste = colecao.getColecao();
+//		System.out.println(teste.retornarTamanho());
+//		
+//	}
 }
