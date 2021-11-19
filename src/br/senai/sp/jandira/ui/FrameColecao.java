@@ -21,11 +21,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class FrameColecao extends FrameAdicionarJogos{
+public class FrameColecao extends FrameAdicionarJogos {
 
 	private JPanel contentPane;
 	private JTextField txtTamanhoColecao;
-	private JogoRepository colecao;
+	//private JogoRepository colecao;
 	public FrameAdicionarJogos adicionar;
 	public Jogo jogo;
 	public int posicao;
@@ -73,35 +73,26 @@ public class FrameColecao extends FrameAdicionarJogos{
 		txtTamanhoColecao = new JTextField();
 		txtTamanhoColecao.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtTamanhoColecao.setBounds(9, 36, 143, 34);
-		txtTamanhoColecao.setText("0");
 		contentPane.add(txtTamanhoColecao);
 		txtTamanhoColecao.setColumns(10);
 
 		this.adicionar = new FrameAdicionarJogos();
-		setJogo(adicionar.retornarJogo());
 		
-		//colecao.gravar(posicao, jogo);
-		
-
 		btnAdicionar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				String tamanhoColecao = txtTamanhoColecao.getText();
 				int tamanhoColecaoInt = Integer.parseInt(tamanhoColecao);
-
-				colecao = new JogoRepository(tamanhoColecaoInt);
 				
-				if (tamanhoColecaoInt < 1) {
+				if (txtTamanhoColecao.equals(null)) {
 					JOptionPane.showMessageDialog(null, "Informe o tamanho da sua coleção!");
-					System.out.println(colecao.retornarTamanho());
 				} else {
 					adicionar.setVisible(true);
-					System.out.println(colecao.retornarTamanho());
+					//System.out.println(colecao.retornarTamanho());
 					posicao++;
 				}
-			System.out.println(jogo.getTiulo());
+				colecao = new JogoRepository(tamanhoColecaoInt);
 			}
 		});
 
@@ -113,24 +104,29 @@ public class FrameColecao extends FrameAdicionarJogos{
 				listaFabricantes.setVisible(true);
 			}
 		});
-		
-		
 
 	}
 
-	public JogoRepository getColecao() {
-		return colecao;
-	}
-
-	public void setColecao(JogoRepository colecao) {
-		this.colecao = colecao;
-	}
+//	public JogoRepository getColecao() {
+//		return colecao;
+//	}
+//
+//	public void setColecao(JogoRepository colecao) {
+//		this.colecao = colecao;
+//	}
 	
+	public void gravarColecao(Jogo jogo, int posicao) {
+		this.jogo = jogo;
+		System.out.println(jogo.getTiulo());
+		colecao.gravar(posicao, jogo);
+	}
+
 	public Jogo getJogo() {
 		return jogo;
 	}
 
-	public void setJogo(Jogo jogo) {
-		this.jogo = jogo;
-	}
+//	public void setJogo(Jogo jogo) {
+//		this.jogo = jogo;
+//		System.out.println(jogo.getTiulo());
+//	}
 }

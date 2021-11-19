@@ -118,6 +118,7 @@ public class FrameAdicionarJogos extends JFrame{
 		contentPane.add(btnSalvar);
 		
 		this.jogo = new Jogo();
+		this.colecao = null;
 		
 		
 		btnSalvar.addActionListener(new ActionListener() {
@@ -132,6 +133,8 @@ public class FrameAdicionarJogos extends JFrame{
 				jogo.setObservacoes(txtObervacoes.getText());
 				posicao++;
 				contentPane.setVisible(false);
+				colecao = new FrameColecao();
+				colecao.gravarColecao(jogo, posicao);
 				
 			}
 		});
