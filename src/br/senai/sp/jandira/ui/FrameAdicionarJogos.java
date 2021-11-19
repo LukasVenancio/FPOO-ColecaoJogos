@@ -117,22 +117,22 @@ public class FrameAdicionarJogos extends JFrame{
 		btnSalvar.setBounds(342, 350, 162, 41);
 		contentPane.add(btnSalvar);
 		
+		this.jogo = new Jogo();
+		
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				jogo = new Jogo();
 				jogo.setTiulo(txtTitulo.getText());
 				jogo.setStatus(chckbxStatus.isSelected());
 				jogo.setConsole(determinarConsole(comboConsole.getSelectedIndex()));
 				jogo.setValor(txtValor.getText());
 				jogo.setObservacoes(txtObervacoes.getText());
-				chckbxStatus.setSelected(jogo.isStatus());
 				posicao++;
+				contentPane.setVisible(false);
 				
-				colecao.testar(jogo, posicao);	
 			}
 		});
 		

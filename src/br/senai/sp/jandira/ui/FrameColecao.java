@@ -27,6 +27,8 @@ public class FrameColecao extends FrameAdicionarJogos{
 	private JTextField txtTamanhoColecao;
 	private JogoRepository colecao;
 	public FrameAdicionarJogos adicionar;
+	public Jogo jogo;
+	public int posicao;
 
 	public FrameColecao() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,10 +77,11 @@ public class FrameColecao extends FrameAdicionarJogos{
 		contentPane.add(txtTamanhoColecao);
 		txtTamanhoColecao.setColumns(10);
 
-		String tamanhoColecao = txtTamanhoColecao.getText();
-		int tamanhoColecaoInt = Integer.parseInt(tamanhoColecao);
-
-		colecao = new JogoRepository(tamanhoColecaoInt);
+		this.adicionar = new FrameAdicionarJogos();
+		setJogo(adicionar.retornarJogo());
+		
+		//colecao.gravar(posicao, jogo);
+		
 
 		btnAdicionar.addActionListener(new ActionListener() {
 
@@ -94,10 +97,11 @@ public class FrameColecao extends FrameAdicionarJogos{
 					JOptionPane.showMessageDialog(null, "Informe o tamanho da sua coleção!");
 					System.out.println(colecao.retornarTamanho());
 				} else {
-					adicionar = new FrameAdicionarJogos();
 					adicionar.setVisible(true);
 					System.out.println(colecao.retornarTamanho());
+					posicao++;
 				}
+			System.out.println(jogo.getTiulo());
 			}
 		});
 
@@ -109,6 +113,8 @@ public class FrameColecao extends FrameAdicionarJogos{
 				listaFabricantes.setVisible(true);
 			}
 		});
+		
+		
 
 	}
 
@@ -120,8 +126,11 @@ public class FrameColecao extends FrameAdicionarJogos{
 		this.colecao = colecao;
 	}
 	
-	public void testar(Jogo jogo, int posicao) {
-		colecao.gravar(adicionar.retornarPosicai(), adicionar.retornarJogo());
-		System.out.println(colecao.retornarJogo(posicao));
+	public Jogo getJogo() {
+		return jogo;
+	}
+
+	public void setJogo(Jogo jogo) {
+		this.jogo = jogo;
 	}
 }
