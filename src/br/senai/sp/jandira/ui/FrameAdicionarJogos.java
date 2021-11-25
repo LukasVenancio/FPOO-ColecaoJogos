@@ -33,7 +33,7 @@ public class FrameAdicionarJogos extends JFrame{
 	private int posicao;
 	public FrameColecao colecao;
 
-	public FrameAdicionarJogos() {
+	public FrameAdicionarJogos(FrameColecao fc) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 658, 475);
 		contentPane = new JPanel();
@@ -133,8 +133,9 @@ public class FrameAdicionarJogos extends JFrame{
 				jogo.setObservacoes(txtObervacoes.getText());
 				posicao++;
 				contentPane.setVisible(false);
-				colecao = new FrameColecao();
-				colecao.gravarColecao(jogo);
+				/*colecao = new FrameColecao();
+				colecao.gravarColecao(jogo);*/
+				fc.gravarColecao(jogo);
 				
 			}
 		});

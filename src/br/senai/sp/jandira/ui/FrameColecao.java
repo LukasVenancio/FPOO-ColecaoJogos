@@ -22,7 +22,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class FrameColecao extends FrameAdicionarJogos {
+public class FrameColecao extends JFrame {
 
 	private JPanel contentPane;
 	private JogoRepository colecao;
@@ -69,7 +69,7 @@ public class FrameColecao extends FrameAdicionarJogos {
 		btnFabricantes.setBounds(29, 195, 109, 34);
 		contentPane.add(btnFabricantes);
 
-		this.adicionar = new FrameAdicionarJogos();
+		this.adicionar = new FrameAdicionarJogos(this);
 		this.colecao = new JogoRepository();
 
 		btnAdicionar.addActionListener(new ActionListener() {
@@ -99,13 +99,10 @@ public class FrameColecao extends FrameAdicionarJogos {
 		System.out.println(jogo.getConsole());
 		colecao.gravar(jogo);
 
-		String teste =  jogo.getTiulo();
 		
-		this.modelJogosAdicionados.addElement(teste.toString());
-		this.modelJogosAdicionados.addElement("bbbbb");
+		this.modelJogosAdicionados.addElement(jogo.getTiulo());
 
 	
-		System.out.println(teste);
 
 	}
 
