@@ -134,7 +134,7 @@ public class FrameAdicionarJogos extends JFrame{
 				posicao++;
 				contentPane.setVisible(false);
 				colecao = new FrameColecao();
-				colecao.gravarColecao(jogo, posicao);
+				colecao.gravarColecao(jogo);
 				
 			}
 		});

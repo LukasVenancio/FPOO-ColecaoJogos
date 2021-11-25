@@ -18,17 +18,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
 public class FrameColecao extends FrameAdicionarJogos {
 
 	private JPanel contentPane;
-	private JTextField txtTamanhoColecao;
-	//private JogoRepository colecao;
+	private JogoRepository colecao;
 	public FrameAdicionarJogos adicionar;
 	public Jogo jogo;
-	public int posicao;
+	public DefaultListModel<String> modelJogosAdicionados;
+	public JList<String> lstJogos;
 
 	public FrameColecao() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,53 +48,37 @@ public class FrameColecao extends FrameAdicionarJogos {
 		scrollPane.setBounds(186, 36, 173, 250);
 		contentPane.add(scrollPane);
 
-		JList lstJogos = new JList();
+		this.lstJogos = new JList();
+		this.modelJogosAdicionados = new DefaultListModel<String>();
+		this.lstJogos.setModel(modelJogosAdicionados);
+
 		scrollPane.setViewportView(lstJogos);
 
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnAdicionar.setBounds(10, 81, 109, 34);
+		btnAdicionar.setBounds(29, 60, 109, 34);
 		contentPane.add(btnAdicionar);
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnExcluir.setBounds(10, 143, 109, 34);
+		btnExcluir.setBounds(29, 126, 109, 34);
 		contentPane.add(btnExcluir);
 
 		JButton btnFabricantes = new JButton("Fabricantes");
 		btnFabricantes.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnFabricantes.setBounds(10, 205, 109, 34);
+		btnFabricantes.setBounds(29, 195, 109, 34);
 		contentPane.add(btnFabricantes);
 
-		JLabel lblTamanhoDaColecao = new JLabel("Tamanho da cole\u00E7\u00E3o:");
-		lblTamanhoDaColecao.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTamanhoDaColecao.setBounds(10, 11, 155, 19);
-		contentPane.add(lblTamanhoDaColecao);
-
-		txtTamanhoColecao = new JTextField();
-		txtTamanhoColecao.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtTamanhoColecao.setBounds(9, 36, 143, 34);
-		contentPane.add(txtTamanhoColecao);
-		txtTamanhoColecao.setColumns(10);
-
 		this.adicionar = new FrameAdicionarJogos();
-		
+		this.colecao = new JogoRepository();
+
 		btnAdicionar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String tamanhoColecao = txtTamanhoColecao.getText();
-				int tamanhoColecaoInt = Integer.parseInt(tamanhoColecao);
-				
-				if (txtTamanhoColecao.equals(null)) {
-					JOptionPane.showMessageDialog(null, "Informe o tamanho da sua coleção!");
-				} else {
-					adicionar.setVisible(true);
-					//System.out.println(colecao.retornarTamanho());
-					posicao++;
-				}
-				colecao = new JogoRepository(tamanhoColecaoInt);
+				adicionar.setVisible(true);
 			}
+
 		});
 
 		btnFabricantes.addActionListener(new ActionListener() {
@@ -104,29 +89,33 @@ public class FrameColecao extends FrameAdicionarJogos {
 				listaFabricantes.setVisible(true);
 			}
 		});
-
 	}
 
-//	public JogoRepository getColecao() {
-//		return colecao;
-//	}
-//
-//	public void setColecao(JogoRepository colecao) {
-//		this.colecao = colecao;
-//	}
-	
-	public void gravarColecao(Jogo jogo, int posicao) {
+	public void gravarColecao(Jogo jogo) {
 		this.jogo = jogo;
 		System.out.println(jogo.getTiulo());
-		colecao.gravar(posicao, jogo);
+		System.out.println(jogo.getObservacoes());
+		System.out.println(jogo.getValor());
+		System.out.println(jogo.getConsole());
+		colecao.gravar(jogo);
+
+		String teste =  jogo.getTiulo();
+		
+		this.modelJogosAdicionados.addElement(teste.toString());
+		this.modelJogosAdicionados.addElement("bbbbb");
+
+	
+		System.out.println(teste);
+
 	}
 
 	public Jogo getJogo() {
 		return jogo;
 	}
 
-//	public void setJogo(Jogo jogo) {
-//		this.jogo = jogo;
-//		System.out.println(jogo.getTiulo());
+//	public DefaultListModel<String> retornarModel() {
+//		modelJogosAdicionados = new DefaultListModel<String>();
+//		return modelJogosAdicionados;
 //	}
+
 }

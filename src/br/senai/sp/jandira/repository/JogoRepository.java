@@ -1,29 +1,31 @@
 package br.senai.sp.jandira.repository;
 
+import java.util.ArrayList;
+
 import br.senai.sp.jandira.model.Jogo;
 
 public class JogoRepository {
-	
-	private Jogo[] colecao;
-	
-	public JogoRepository(int tamanhoColecao) {
-		colecao = new Jogo[tamanhoColecao];
+
+	private ArrayList<Jogo> colecao;
+
+	public JogoRepository() {
+		colecao = new ArrayList<Jogo>();
 	}
-	
-	public void gravar(int posicao, Jogo jogo) {
-		colecao[posicao] = jogo;
+
+	public void gravar(Jogo jogo) {
+		colecao.add(jogo);
 	}
-	
+
 	public Jogo retornarJogo(int posicao) {
-		return colecao[posicao];
+		return colecao.get(posicao);
 	}
-	
-	public Jogo[] retornarTodos() {
+
+	public ArrayList<Jogo> retornarTodos() {
 		return colecao;
 	}
-	
+
 	public int retornarTamanho() {
-		return colecao.length;
+		return colecao.size();
 	}
 
 }
