@@ -6,10 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.senai.sp.jandira.model.Fabricante;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrameAdicionarFabricante extends JFrame {
 
@@ -17,8 +22,9 @@ public class FrameAdicionarFabricante extends JFrame {
 	private JTextField txtNome;
 	private JTextField txtDataFundacao;
 	private JTextField txtGeneroPrincipal;
+	private Fabricante fabricante;
 
-	public FrameAdicionarFabricante() {
+	public FrameAdicionarFabricante(FrameListaFabricantes frameListaFabricantes ) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 522, 160);
 		contentPane = new JPanel();
@@ -63,5 +69,13 @@ public class FrameAdicionarFabricante extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton.setBounds(308, 64, 124, 41);
 		contentPane.add(btnNewButton);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
 	}
 }

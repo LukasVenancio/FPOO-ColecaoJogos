@@ -18,6 +18,7 @@ import javax.swing.JButton;
 public class FrameListaFabricantes extends JFrame {
 
 	private JPanel contentPane;
+	public FrameAdicionarFabricante frameAdicionarFabricantes;
 
 	public FrameListaFabricantes() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,12 +55,13 @@ public class FrameListaFabricantes extends JFrame {
 		btnVerMais.setBounds(165, 162, 107, 35);
 		contentPane.add(btnVerMais);
 		
+		frameAdicionarFabricantes = new FrameAdicionarFabricante(this);
+		
 		btnAdicionar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameAdicionarFabricante adicionar = new FrameAdicionarFabricante();
-				adicionar.setVisible(true);
+				frameAdicionarFabricantes.setVisible(true);
 				
 			}
 		});

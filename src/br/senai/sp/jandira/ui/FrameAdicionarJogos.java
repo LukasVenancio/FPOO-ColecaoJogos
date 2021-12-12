@@ -30,8 +30,8 @@ public class FrameAdicionarJogos extends JFrame{
 	private JTextField txtValor;
 	private JTextField txtObervacoes;
 	private Jogo jogo;
-	private int posicao;
-	public FrameColecao colecao;
+	private JCheckBox chckbxStatus;
+	private JComboBox comboConsole;
 
 	public FrameAdicionarJogos(FrameColecao fc) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -75,7 +75,7 @@ public class FrameAdicionarJogos extends JFrame{
 		lblConsole.setBounds(10, 112, 60, 27);
 		contentPane.add(lblConsole);
 		
-		JComboBox comboConsole = new JComboBox();
+		comboConsole = new JComboBox();
 		comboConsole.setModel(new DefaultComboBoxModel(Console.values()));
 		comboConsole.setBounds(67, 114, 129, 26);
 		contentPane.add(comboConsole);
@@ -91,7 +91,7 @@ public class FrameAdicionarJogos extends JFrame{
 		txtValor.setBounds(269, 112, 105, 27);
 		contentPane.add(txtValor);
 		
-		JCheckBox chckbxStatus = new JCheckBox("J\u00E1 foi zerado?");
+		chckbxStatus = new JCheckBox("J\u00E1 foi zerado?");
 		chckbxStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxStatus.setBounds(413, 114, 129, 23);
 		contentPane.add(chckbxStatus);
@@ -117,26 +117,22 @@ public class FrameAdicionarJogos extends JFrame{
 		btnSalvar.setBounds(342, 350, 162, 41);
 		contentPane.add(btnSalvar);
 		
-		this.jogo = new Jogo();
-		this.colecao = null;
-		
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				jogo = new Jogo();
 				jogo.setTiulo(txtTitulo.getText());
 				jogo.setStatus(chckbxStatus.isSelected());
 				jogo.setConsole(determinarConsole(comboConsole.getSelectedIndex()));
 				jogo.setValor(txtValor.getText());
 				jogo.setObservacoes(txtObervacoes.getText());
-				posicao++;
-				contentPane.setVisible(false);
-				/*colecao = new FrameColecao();
-				colecao.gravarColecao(jogo);*/
 				fc.gravarColecao(jogo);
-				
+				txtTitulo.setText(null);
+				chckbxStatus.setSelected(false);
+				txtValor.setText(null);
+				txtObervacoes.setText(null);
 			}
 		});
 		
@@ -144,8 +140,8 @@ public class FrameAdicionarJogos extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameAdicionarFabricante adicionarFabricante = new FrameAdicionarFabricante();
-				adicionarFabricante.setVisible(true);
+				//FrameAdicionarFabricante adicionarFabricante = new FrameAdicionarFabricante();
+				//adicionarFabricante.setVisible(true);
 				
 			}
 		});
@@ -169,13 +165,24 @@ public class FrameAdicionarJogos extends JFrame{
 	public Jogo retornarJogo() {
 		return jogo;
 	}
-	public int retornarPosicai() {
-		return posicao;
+	
+	public JTextField retornarTxtJogo() {
+		return txtTitulo;
 	}
 	
-//	public void testar(JogoRepository colecao) {
-//		JogoRepository teste = colecao.getColecao();
-//		System.out.println(teste.retornarTamanho());
-//		
-//	}
+	public JCheckBox retornarChckbxStatus() {
+		return chckbxStatus;
+	}
+	
+	public JComboBox retornarComboConsole(){
+		return comboConsole;
+	}
+	
+	public JTextField retornarTxtValor() {
+		return txtValor;
+	}
+	
+	public JTextField retornarTxtObservacoes() {
+		return txtObervacoes;
+	}
 }

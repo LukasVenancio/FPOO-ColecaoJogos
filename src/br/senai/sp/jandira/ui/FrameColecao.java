@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import br.senai.sp.jandira.model.Jogo;
 import br.senai.sp.jandira.repository.JogoRepository;
@@ -30,6 +32,7 @@ public class FrameColecao extends JFrame {
 	public Jogo jogo;
 	public DefaultListModel<String> modelJogosAdicionados;
 	public JList<String> lstJogos;
+	public int index;
 
 	public FrameColecao() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +74,24 @@ public class FrameColecao extends JFrame {
 
 		this.adicionar = new FrameAdicionarJogos(this);
 		this.colecao = new JogoRepository();
+		
+		lstJogos.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				System.out.println("Eu fui selecionado");
+				//FrameAdicionarJogos adicionar2 = new FrameAdicionarJogos(this);
+				index = lstJogos.getSelectedIndex();
+				Jogo jogoSelecionado = colecao.retornarJogo(index);
+				adicionar.retornarTxtJogo().setText(jogoSelecionado.getTiulo());
+				adicionar.retornarChckbxStatus().setSelected(jogoSelecionado.isStatus());
+				adicionar.retornarComboConsole().setSelectedIndex(jogoSelecionado.getConsole().ordinal());
+				adicionar.retornarTxtValor().setText(jogoSelecionado.getValor());
+				adicionar.retornarTxtObservacoes().setText(jogoSelecionado.getObservacoes());
+				adicionar.setVisible(true);
+				
+			}
+		});
 
 		btnAdicionar.addActionListener(new ActionListener() {
 
@@ -87,6 +108,7 @@ public class FrameColecao extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				FrameListaFabricantes listaFabricantes = new FrameListaFabricantes();
 				listaFabricantes.setVisible(true);
+				
 			}
 		});
 	}
@@ -101,18 +123,18 @@ public class FrameColecao extends JFrame {
 
 		
 		this.modelJogosAdicionados.addElement(jogo.getTiulo());
-
-	
-
 	}
 
 	public Jogo getJogo() {
 		return jogo;
 	}
-
-//	public DefaultListModel<String> retornarModel() {
-//		modelJogosAdicionados = new DefaultListModel<String>();
-//		return modelJogosAdicionados;
-//	}
+	
+	public JList getLstJogos() {
+		return lstJogos;
+	}
+	
+	public void setIndex(int indexNovo) {
+		this.index = indexNovo;
+	}
 
 }
