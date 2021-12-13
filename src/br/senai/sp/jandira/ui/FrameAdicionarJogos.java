@@ -133,6 +133,7 @@ public class FrameAdicionarJogos extends JFrame{
 				chckbxStatus.setSelected(false);
 				txtValor.setText(null);
 				txtObervacoes.setText(null);
+				setVisible(false);
 			}
 		});
 		

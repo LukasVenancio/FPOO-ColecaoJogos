@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.senai.sp.jandira.model.Fabricante;
+import br.senai.sp.jandira.repository.FabricanteRepository;
+
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JLabel;
@@ -13,13 +17,18 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 public class FrameListaFabricantes extends JFrame {
 
 	private JPanel contentPane;
 	public FrameAdicionarFabricante frameAdicionarFabricantes;
-
+	public Fabricante fabricante;
+	public FabricanteRepository colecao;
+	public DefaultListModel<String> modelFabricantesAdicionados;
+	public JList<String> lstFabricantes;
+	
 	public FrameListaFabricantes() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 305, 300);
@@ -32,7 +41,9 @@ public class FrameListaFabricantes extends JFrame {
 		scrollPane.setBounds(10, 29, 133, 199);
 		contentPane.add(scrollPane);
 		
-		JList lstFabricantes = new JList();
+		lstFabricantes = new JList<String>();
+		modelFabricantesAdicionados = new DefaultListModel<String>();
+		lstFabricantes.setModel(modelFabricantesAdicionados);
 		scrollPane.setViewportView(lstFabricantes);
 		
 		JLabel lblFabricantesAdicionados = new JLabel("Fabricantes adicionados:");
@@ -56,6 +67,7 @@ public class FrameListaFabricantes extends JFrame {
 		contentPane.add(btnVerMais);
 		
 		frameAdicionarFabricantes = new FrameAdicionarFabricante(this);
+		colecao = new FabricanteRepository();
 		
 		btnAdicionar.addActionListener(new ActionListener() {
 			
@@ -65,5 +77,14 @@ public class FrameListaFabricantes extends JFrame {
 				
 			}
 		});
+	}
+	
+	public void gravarFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+		System.out.println(fabricante.getNome());
+		System.out.println(fabricante.getDataDeFundacao());
+		System.out.println(fabricante.getGeneroPrincipal());
+		colecao.gravar(fabricante);
+		this.modelFabricantesAdicionados.addElement(fabricante.getNome());
 	}
 }

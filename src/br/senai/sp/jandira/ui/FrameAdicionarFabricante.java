@@ -65,16 +65,22 @@ public class FrameAdicionarFabricante extends JFrame {
 		txtGeneroPrincipal.setBounds(125, 67, 136, 31);
 		contentPane.add(txtGeneroPrincipal);
 		
-		JButton btnNewButton = new JButton("Salvar");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(308, 64, 124, 41);
-		contentPane.add(btnNewButton);
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnSalvar.setBounds(308, 64, 124, 41);
+		contentPane.add(btnSalvar);
 		
-		btnNewButton.addActionListener(new ActionListener() {
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
+				fabricante = new Fabricante();
+				fabricante.setNome(txtNome.getText());
+				fabricante.setDataDeFundacao(txtDataFundacao.getText());
+				fabricante.setGeneroPrincipal(txtGeneroPrincipal.getText());
+				frameListaFabricantes.gravarFabricante(fabricante);
+				txtNome.setText(null);
+				txtDataFundacao.setText(null);
+				txtGeneroPrincipal.setText(null);
+				setVisible(false);
 			}
 		});
 	}
