@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.JList;
@@ -75,12 +77,55 @@ public class FrameColecao extends JFrame {
 		this.adicionar = new FrameAdicionarJogos(this);
 		this.colecao = new JogoRepository();
 		
+		btnAdicionar.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		btnExcluir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				index = lstJogos.getSelectedIndex();
+				modelJogosAdicionados.remove(index);
+				colecao.excluirJogo(index);
+				
+			}
+		});
+		
 		lstJogos.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				System.out.println("Eu fui selecionado");
-				//FrameAdicionarJogos adicionar2 = new FrameAdicionarJogos(this);
 				index = lstJogos.getSelectedIndex();
 				Jogo jogoSelecionado = colecao.retornarJogo(index);
 				adicionar.retornarTxtJogo().setText(jogoSelecionado.getTiulo());
@@ -120,8 +165,6 @@ public class FrameColecao extends JFrame {
 		System.out.println(jogo.getValor());
 		System.out.println(jogo.getConsole());
 		colecao.gravar(jogo);
-
-		
 		this.modelJogosAdicionados.addElement(jogo.getTiulo());
 	}
 

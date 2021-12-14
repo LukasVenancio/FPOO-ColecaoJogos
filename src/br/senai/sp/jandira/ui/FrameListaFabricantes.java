@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import br.senai.sp.jandira.model.Fabricante;
 import br.senai.sp.jandira.repository.FabricanteRepository;
@@ -28,6 +30,7 @@ public class FrameListaFabricantes extends JFrame {
 	public FabricanteRepository colecao;
 	public DefaultListModel<String> modelFabricantesAdicionados;
 	public JList<String> lstFabricantes;
+	public int index;
 	
 	public FrameListaFabricantes() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,6 +71,19 @@ public class FrameListaFabricantes extends JFrame {
 		
 		frameAdicionarFabricantes = new FrameAdicionarFabricante(this);
 		colecao = new FabricanteRepository();
+		
+		lstFabricantes.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				index = lstFabricantes.getSelectedIndex();
+				Fabricante fabricanteSelecionado = colecao.retornarFabricante(index);
+				frameAdicionarFabricantes.retornarTxtNome().setText(fabricanteSelecionado.getNome());
+				frameAdicionarFabricantes.retornarTxtDataDeFundacao().setText(fabricanteSelecionado.getDataDeFundacao());
+				frameAdicionarFabricantes.retornarTxtGeneroPrincipal().setText(fabricanteSelecionado.getGeneroPrincipal());
+				frameAdicionarFabricantes.setVisible(true);
+			}
+		});
 		
 		btnAdicionar.addActionListener(new ActionListener() {
 			

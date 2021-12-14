@@ -84,4 +84,16 @@ public class FrameAdicionarFabricante extends JFrame {
 			}
 		});
 	}
+	
+	public JTextField retornarTxtNome() {
+		return txtNome;
+	}
+	
+	public JTextField retornarTxtDataDeFundacao() {
+		return txtDataFundacao;
+	}
+	
+	public JTextField retornarTxtGeneroPrincipal() {
+		return txtGeneroPrincipal;
+	}
 }

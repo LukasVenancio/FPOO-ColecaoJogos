@@ -27,5 +27,9 @@ public class JogoRepository {
 	public int retornarTamanho() {
 		return colecao.size();
 	}
+	
+	public void excluirJogo(int posicao) {
+		colecao.remove(posicao);
+	}
 
 }
